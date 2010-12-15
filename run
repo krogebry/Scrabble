@@ -1,0 +1,3 @@
+#!/bin/bash
+
+thin -p 6500 -R config/config.ru start

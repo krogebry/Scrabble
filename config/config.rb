@@ -1,24 +1,24 @@
 ##
 # Configuration file for main application
 ##
-ApplicationName	= "framework"
+ApplicationName	= "Scrabble"
 
 ## Database settings
-DBName  	= "framework"
+DBName  	= "Scrabble"
 DBPort  	= 10000
-DBHostname	= "devel01"
-#DBHostname	= "localhost"
+#DBHostname	= "devel01"
+DBHostname	= "localhost"
 
 RTMPHost	= "192.168.1.89"
 
-URLMediaShare	= "http://framework.devel.ksonsoftware.com/ms"
+URLMediaShare	= "http://Scrabble.devel.ksonsoftware.com/ms"
 
-FSProdAppLogFile	= "/var/log/thin/framework.app.log"
-FSProdErrorLogFile	= "/var/log/thin/framework.error.log"
+FSProdAppLogFile	= "/var/log/thin/Scrabble.app.log"
+FSProdErrorLogFile	= "/var/log/thin/Scrabble.error.log"
 
-FSFilesContainer	= "/usr/local/data/framework/files"
-FSVideosContainer	= "/usr/local/data/framework/videos"
+FSFilesContainer	= "/usr/local/data/Scrabble/files"
+FSVideosContainer	= "/usr/local/data/Scrabble/videos"
 
-FSDocRoot	= "/var/www/ksonsoftware.com/dev/framework"
+FSDocRoot	= "/var/www/ksonsoftware.com/dev/Scrabble"
 
 MCServers   = ["devel01:11211"]

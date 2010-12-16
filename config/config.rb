@@ -6,8 +6,8 @@ ApplicationName	= "Scrabble"
 ## Database settings
 DBName  	= "Scrabble"
 DBPort  	= 10000
-#DBHostname	= "devel01"
-DBHostname	= "localhost"
+DBHostname	= "devel01"
+#DBHostname	= "localhost"
 
 RTMPHost	= "192.168.1.89"
 

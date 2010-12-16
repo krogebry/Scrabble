@@ -13,27 +13,43 @@ begin
 		#cWords.save({ :word => l.chop() })
 	#end
 
-	#words = ["w","c","h","e","e","n","u" ]
-	#tiles = ["n","t","t","i","q","w","e"]
-	tiles = ["w","c","e","n","r","a","h"]
+	strWordGroup = %{n,m,u,s,o,r,o}
 
-	strWordGroup = tiles.join( "," )
+	#spaces = [1,3,1,1,1,1]
+	#spaces = [1,1,1,1,3,1]
+	#spaces = [1,1,1,1,3]
+	spaces = [1,1,1,1,1]
 
-	#re = /^[#{words.join(",")}]{1,2}g[a-z]$/
-	re = /^[#{strWordGroup}]{5}k$/
+	re = /^[#{strWordGroup}]{1}x[#{strWordGroup}]{1,3}$/
+	#re = /^r[#{strWordGroup}]{2,3}$/
 
 	Log.info( "Re" ){ re }
 
-	words = cWords.find({
-		:word => re
-		#:word => { "$size" => 3 }
-	})
+	potentials = cWords.find({ :word => re }).sort([[ "val",1 ]])
 
-	Log.debug( "Num words" ){ words.count() }
+	Log.debug( "Num potentials" ){ potentials.count() }
 
-	words.each do |word|
-		#next if(word.size != 4)
-		Log.warn( "Word" ){ word["word"] }
+	## venue = 12 / 11
+
+	words = []
+
+	potentials.each do |word|
+		pVal = 0
+		i = (spaces.size - word["word"].size)
+		#Log.warn( "Word" ){ "%i %s" % [word["val"].to_i(),word["word"]] }
+		#Log.warn( "Ey" ){ i }
+		word["word"].each_char do |letter|
+			pVal += (LetterValues[letter.to_sym()] * spaces[i])
+			i+=1
+		end
+		#word[:pVal] = pVal
+		#next if(word["word"].size != 5)
+		#Log.warn( "Word" ){ "%i %s" % [pVal,word["word"]] }
+		words.push({ :pVal => pVal, :word => word["word"] })
+	end
+
+	words.sort(){|a,b| a[:pVal] <=> b[:pVal] }.each do |word|
+		Log.warn( "Word" ){ "%i %s" % [word[:pVal],word[:word]] }
 	end
 
 rescue => e

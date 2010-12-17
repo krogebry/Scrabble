@@ -11,6 +11,7 @@ require 'memcache'
 require 'nokogiri'
 
 require '../config/config.rb'
+require '../config/values.rb'
 
 #MongoMapper.connection = Connection.new( DBHostname,DBPort,{ :slave_ok => true })
 #MongoMapper.database = DBName

@@ -13,15 +13,15 @@ begin
 		#cWords.save({ :word => l.chop() })
 	#end
 
-	strWordGroup = %{n,m,u,s,o,r,o}
+	strWordGroup = %{o,d,o,f,h,i,d}
 
 	#spaces = [1,3,1,1,1,1]
 	#spaces = [1,1,1,1,3,1]
 	#spaces = [1,1,1,1,3]
-	spaces = [1,1,1,1,1]
+	spaces = [1,1,1,1,1,1]
 
-	re = /^[#{strWordGroup}]{1}x[#{strWordGroup}]{1,3}$/
-	#re = /^r[#{strWordGroup}]{2,3}$/
+	#re = /^[#{strWordGroup}]{1}e[#{strWordGroup}]{1,2}$/
+	re = /^j[#{strWordGroup}]{1,5}$/
 
 	Log.info( "Re" ){ re }
 

@@ -21,7 +21,7 @@ DBConn = Connection.new( DBHostname,DBPort,{ :slave_ok => true, :pool_size => 10
 Dir.glob(File.join("../libs/**", '*.rb')).sort().each { |f| require f }
 Dir.glob(File.join("../models/**", '*.rb')).sort().each { |f| require f }
 
-MCache = MemCache.new( MCServers )
+MCache = Memcache.new({ :servers => [MCServers] })
 #SStr = SecureStrings.new()
 
 Log = Logger.new(STDOUT)

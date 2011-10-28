@@ -5,13 +5,10 @@
 require 'init.rb'
 
 begin
-
 	cWords = DBConn.collection( "words" )
-
-	File.open( "../data/fulldictionary00.txt" ).read.each do |l|
-		#word = l.chop()
-
-		cWords.save({ :word => l.chop() })
+	cWords.remove()
+	File.open( "../data/twl06.txt" ).read.each do |l|
+		cWords.save({ :word => l.chop().downcase() })
 	end
 
 rescue => e

@@ -44,8 +44,8 @@ begin
 	#spaces = [1,1,1,1,3]
 	spaces = [1,1,1,1,1,1]
 
-	#re = /^[#{strWordGroup}]{2}a[#{strWordGroup}]{3,5}$/
-	re = /^r[#{strWordGroup}]{3,7}$/
+	re = /^[#{strWordGroup}]{1,3}d[#{strWordGroup}]{1,3}$/
+	#re = /^c[#{strWordGroup}]{1,5}$/
 
 	if(false)
 	reGroup = []

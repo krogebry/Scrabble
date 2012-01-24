@@ -48,9 +48,9 @@ $(document).ready(function()
 
 		// Cubes
 		var geometry = new THREE.CubeGeometry( 50, 50, 50 );
-		var material = new THREE.MeshLambertMaterial( { color: 0xff00ff, shading: THREE.FlatShading, overdraw: true } );
+		var material = new THREE.MeshLambertMaterial( { color: 0xefefef, shading: THREE.FlatShading, overdraw: true, opacity: 0.5 } );
 
-		for ( var i = 0; i < 100; i ++ ) {
+		for ( var i = 0; i < 1; i ++ ) {
 			var cube = new THREE.Mesh( geometry, material );
 			cube.overdraw = true;
 
@@ -60,24 +60,36 @@ $(document).ready(function()
 			cube.position.y = ( cube.scale.y * 50 ) / 2;
 			cube.position.z = Math.floor( ( Math.random() * 1000 - 500 ) / 50 ) * 50 + 25;
 
+			cube.scaleDrag = 0.1
+			cube.scalePosition = 0.1
+			cube.scaleDirection = 1;
+
 			cubes.push( cube );
 			scene.add( cube );
 		}
 
 		// Lights
-		var ambientLight = new THREE.AmbientLight( Math.random() * 0x10 );
+		//var ambientLight = new THREE.AmbientLight( Math.random() * 0x10 );
 		//var ambientLight = new THREE.AmbientLight( 0xffffff );
-		scene.add( ambientLight );
+		//scene.add( ambientLight );
+
+		var pointLight = new THREE.PointLight( 0xFFFFFF, 1.125 );
+		pointLight.position.x = 300;
+		pointLight.position.y = 300;
+		pointLight.position.z = 300;
+		scene.add( pointLight );
 
 		//console.log( Math.random() * 0xffffff );
 
+		/**
 		var directionalLight = new THREE.DirectionalLight( Math.random() * 0xffffff );
 		directionalLight.position.x = Math.random() - 0.5;
 		directionalLight.position.y = Math.random() - 0.5;
 		directionalLight.position.z = Math.random() - 0.5;
 		console.log( directionalLight.position );
 		directionalLight.position.normalize();
-		scene.add( directionalLight );
+		//scene.add( directionalLight );
+		*/
 
 		/**
 		var directionalLight = new THREE.DirectionalLight( Math.random() * 0xffffff );
@@ -113,8 +125,26 @@ $(document).ready(function()
 		//camera.position.z = Math.sin( timer ) * 200;
 		camera.lookAt( scene.position );
 		cubes.forEach(function( item,idx ){
+
 			//console.log( "Old: "+item.scale.y );
-			//cubes[idx].scale.y = Math.floor( Math.random() * 2 + 1 );
+			var delta = ((item.scalePosition * item.scaleDrag) * item.scaleDirection);
+			//console.log( delta );
+			//cubes[idx].scale.y = cubes[idx].scale.y + delta;
+			//console.log( item.scale.y );
+			item.scalePosition += (item.scaleDrag * item.scaleDirection);
+			//console.log( item.scalePosition );
+
+			if(item.scalePosition >= 1.0)
+			{
+				item.scalePosition = 0.1;
+				item.scaleDirection = -1;
+
+			}else if(item.scalePosition <= 0)
+			{
+				item.scalePosition = 0.1;
+				item.scaleDirection = 1;
+
+			}
 			//console.log( "New: "+item.scale.y );
 		})
 		renderer.render( scene, camera );

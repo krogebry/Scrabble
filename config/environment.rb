@@ -1,24 +1,25 @@
+##
+# Header
+#
 require 'rubygems'
-require 'memcache'
-require 'bcrypt'
 $KCODE = "UTF8"
-require 'jcode'
-require 'unicode'
-require 'net/https'
 require 'rack'
 require 'time'
+require 'jcode'
+require 'bcrypt'
 require 'ftools'
 require 'erubis'
+require 'logger'
+require 'unicode'
+require 'net/https'
 require 'sinatra/base'
-require 'mongo'
-require 'mongo_mapper'
-include Mongo
+require '/var/lib/gems/1.8/gems/memcache-client-1.8.5/lib/memcache.rb'
 
 require 'config/config.rb'
 require 'libs/custom_logger'
 
 begin
-	Log = Logger.new(STDOUT)
+	Log = Logger.new( STDOUT )
 	Log.formatter	= Logger::Formatter.new()
 	Log.level = Logger::DEBUG
 	#Log.fatal("Fatal")
@@ -30,18 +31,18 @@ begin
 	ENV['RACK_ENV'] ||= 'development'
 
 	## Init the db connector for the mapped objects
-	MongoMapper.connection  = Connection.new( DBHostname,DBPort )
-	MongoMapper.database    = DBName
+	#MongoMapper.connection  = Connection.new( DBHostname,DBPort )
+	#MongoMapper.database    = DBName
 
-	DBConn      = Connection.new( DBHostname,DBPort ).db( DBName )
-	Collection	= DBConn.collection( DBName )
+	#DBConn      = Connection.new( DBHostname,DBPort ).db( DBName )
+	#Collection	= DBConn.collection( DBName )
 
 	## Load helpers, modoles, libs, and mounts
 	["helpers", "models", "models", "libs", "mounts", "mounts" ].each do |path|
 		Dir.glob(File.join(path, '*.rb')).sort.each { |f| require f }
 	end
 
-	MCache		= MemCache.new( MCServers )
+	MCache		= MemCache.new({ :servers => MCServers })
 
 rescue => e
 	puts "Exception caught while trying to pre-cache elements: #{$!}"

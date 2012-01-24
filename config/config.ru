@@ -11,7 +11,7 @@ use Rack::MethodOverride
 
 
 #srvs	= ["192.168.1.89:11212:1","192.168.1.89:11211:10"]
-use Rack::Session::Memcache, :memcache_server => MCServers
+use Rack::Session::Memcache, :servers => MCServers
 #use Rack::Auth::Custom
 
 

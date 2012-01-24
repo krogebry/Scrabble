@@ -36,11 +36,11 @@ $(document).ready(function()
 		geometry.vertices.push( new THREE.Vertex( new THREE.Vector3( 500, 0, 0 ) ) );
 
 		for ( var i = 0; i <= 20; i ++ ) {
-			var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.5 } ) );
+			var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0xffffff, pacity: 0.0 } ) );
 			line.position.z = ( i * 50 ) - 500;
 			scene.add( line );
 
-			var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.5 } ) );
+			var line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0xffffff, pacity: 0.0 } ) );
 			line.position.x = ( i * 50 ) - 500;
 			line.rotation.y = 90 * Math.PI / 180;
 			scene.add( line );
@@ -48,7 +48,7 @@ $(document).ready(function()
 
 		// Cubes
 		var geometry = new THREE.CubeGeometry( 50, 50, 50 );
-		var material = new THREE.MeshLambertMaterial( { color: 0xefefef, shading: THREE.FlatShading, overdraw: true, opacity: 0.5 } );
+		var material = new THREE.MeshLambertMaterial( { color: 0xefefef, shading: THREE.FlatShading, overdraw: true, opacity: 0.9 } );
 
 		for ( var i = 0; i < 1; i ++ ) {
 			var cube = new THREE.Mesh( geometry, material );
@@ -61,8 +61,8 @@ $(document).ready(function()
 			cube.position.z = Math.floor( ( Math.random() * 1000 - 500 ) / 50 ) * 50 + 25;
 
 			cube.scaleDrag = 0.1
-			cube.scalePosition = 0.1
-			cube.scaleDirection = 1;
+			cube.scaleStep = 0.1
+			cube.scaleDirection = 1
 
 			cubes.push( cube );
 			scene.add( cube );
@@ -124,25 +124,38 @@ $(document).ready(function()
 		//camera.position.x = Math.cos( timer ) * 200;
 		//camera.position.z = Math.sin( timer ) * 200;
 		camera.lookAt( scene.position );
-		cubes.forEach(function( item,idx ){
-
-			//console.log( "Old: "+item.scale.y );
-			var delta = ((item.scalePosition * item.scaleDrag) * item.scaleDirection);
-			//console.log( delta );
-			//cubes[idx].scale.y = cubes[idx].scale.y + delta;
-			//console.log( item.scale.y );
-			item.scalePosition += (item.scaleDrag * item.scaleDirection);
-			//console.log( item.scalePosition );
-
-			if(item.scalePosition >= 1.0)
+		cubes.forEach(function( item,idx )
+		{
+			if(item.scale.y >= 5)
 			{
-				item.scalePosition = 0.1;
 				item.scaleDirection = -1;
 
-			}else if(item.scalePosition <= 0)
+			}else if(item.scale.y <= 0)
 			{
-				item.scalePosition = 0.1;
 				item.scaleDirection = 1;
+
+			}
+
+			if(item.scaleDirection == 1)
+			{ // Scale up
+				//console.log( "Old: "+item.scale.y );
+				//console.log( "Delta: "+delta );
+				var delta = (item.scaleStep * item.scaleDrag);
+				cubes[idx].scale.y = cubes[idx].scale.y + delta;
+				item.scaleStep += item.scaleDrag; 
+				//console.log( "New: "+item.scale.y );
+				//console.log( "ScalePosition: "+item.scaleStep );
+				//console.log( "ScaleDirection: "+item.scaleDirection );
+
+			}else
+			{ // Scale down
+				//console.log( "Old: "+item.scale.y );
+				var delta = (item.scaleStep * item.scaleDrag);
+				cubes[idx].scale.y = cubes[idx].scale.y + delta;
+				item.scaleStep -= item.scaleDrag; 
+				//console.log( "New: "+item.scale.y );
+				//console.log( "ScalePosition: "+item.scaleStep );
+				//console.log( "ScaleDirection: "+item.scaleDirection );
 
 			}
 			//console.log( "New: "+item.scale.y );

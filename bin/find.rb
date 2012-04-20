@@ -36,8 +36,8 @@ begin
 		#cWords.save({ :word => l.chop() })
 	#end
 
-	#strWordGroup = %{g,g,l,d,n,e,m}
-	strWordGroup = options[:letters]
+	strWordGroup = %{g,g,l,d,n,e,m}
+	#strWordGroup = options[:letters]
 
 	#spaces = [1,3,1,1,1,1]
 	#spaces = [1,1,1,1,3,1]

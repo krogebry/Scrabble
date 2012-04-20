@@ -5,10 +5,12 @@ require 'rubygems'
 require 'net/http'
 require 'time'
 require 'mongo'
-require 'mongo_mapper'
+require 'logger'
+#require 'mongo_mapper'
+require 'dalli'
 include Mongo
-require 'memcache'
-require 'nokogiri'
+#require 'memcache'
+#require 'nokogiri'
 
 require '../config/config.rb'
 require '../config/values.rb'
@@ -21,7 +23,8 @@ DBConn = Connection.new( DBHostname,DBPort,{ :slave_ok => true, :pool_size => 10
 Dir.glob(File.join("../libs/**", '*.rb')).sort().each { |f| require f }
 Dir.glob(File.join("../models/**", '*.rb')).sort().each { |f| require f }
 
-MCache = Memcache.new({ :servers => [MCServers] })
+#MCache = Memcache.new({ :servers => [MCServers] })
+Memc = Dalli::Client.new( "127.0.0.1:11211" )
 #SStr = SecureStrings.new()
 
 Log = Logger.new(STDOUT)

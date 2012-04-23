@@ -1,6 +1,8 @@
 ##
-# Header
+# Scrabble, or whatever the heck this is!
 #
+# @author	Bryan Kroger ( bryan.kroger@gmail.com ) krogebry
+# @author	Kira Kroger ( mistyayn@gmail.com )
 require 'rubygems'
 $KCODE = "UTF8"
 require 'rack'
@@ -14,6 +16,8 @@ require 'unicode'
 require 'net/https'
 require 'sinatra/base'
 require '/var/lib/gems/1.8/gems/memcache-client-1.8.5/lib/memcache.rb'
+
+require 'evernote'
 
 require 'config/config.rb'
 require 'libs/custom_logger'

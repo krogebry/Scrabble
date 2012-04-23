@@ -5,7 +5,9 @@ require 'rubygems'
 require 'net/http'
 require 'time'
 require 'mongo'
-require 'mongo_mapper'
+require 'logger'
+#require 'mongo_mapper'
+require 'dalli'
 include Mongo
 require 'dalli'
 require 'nokogiri'
@@ -22,7 +24,6 @@ Dir.glob(File.join("../libs/**", '*.rb')).sort().each { |f| require f }
 Dir.glob(File.join("../models/**", '*.rb')).sort().each { |f| require f }
 
 Memc = Dalli::Client.new( "127.0.0.1:11211" )
-#MCache = Memcache.new({ :servers => [MCServers] })
 #SStr = SecureStrings.new()
 
 Log = Logger.new(STDOUT)

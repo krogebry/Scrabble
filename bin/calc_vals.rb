@@ -1,8 +1,8 @@
-#!/usr/bin/ruby
+#!/usr/local/bin/ruby
 ##
 # Load some data into the db.
 ##
-require 'init.rb'
+require "./init.rb"
 
 begin
 	vowels = [ :a, :e, :i, :o, :u ]
@@ -45,16 +45,16 @@ begin
 
 	cWords.find().each do |w|
 		val = 0
-		w["word"].each_char do |letter|
+		w["word"].strip.each_char do |letter|
 			#Log.warn( "Val" ){ vals[letter.to_sym()] }
 			#Log.warn( "Letter" ){ letter }
-			val += vals[letter.to_sym()].to_i()
+			val += vals[letter.downcase.to_sym()].to_i()
 		end
 		w["val"] = val
 		#cWords.update( w["_id"],w.join({ :val => val }) )
-		cWords.update({ :_id => w["_id"] },w.merge({ :val => val }) )
+		cWords.update({ :_id => w["_id"] },w.merge({ :word => w["word"].strip.downcase, :val => val }) )
 
-		#Log.debug( "Word" ){ w.inspect }
+		Log.debug( "Word" ){ w.inspect }
 	end
 
 rescue => e

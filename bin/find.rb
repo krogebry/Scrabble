@@ -1,8 +1,8 @@
-#!/usr/bin/ruby
+#!/usr/local/bin/ruby
 ##
 # Load some data into the db.
 ##
-require "init.rb"
+require "./init.rb"
 require "optparse"
 
 options = { :verbose => true }
@@ -36,16 +36,16 @@ begin
 		#cWords.save({ :word => l.chop() })
 	#end
 
-	#strWordGroup = %{g,g,l,d,n,e,m}
-	strWordGroup = options[:letters]
+	strWordGroup = %{a,n,f,e,b,k}
+	#strWordGroup = options[:letters]
 
 	#spaces = [1,3,1,1,1,1]
 	#spaces = [1,1,1,1,3,1]
 	#spaces = [1,1,1,1,3]
 	spaces = [1,1,1,1,1,1]
 
-	#re = /^[#{strWordGroup}]{1,2}r[#{strWordGroup}]{1,3}$/
-	re = /^[#{strWordGroup}]{1,6}r$/
+	#re = /^[#{strWordGroup}]{1}e[#{strWordGroup}]{1,2}$/
+	re = /^c[#{strWordGroup}]{4}$/
 
 	if(false)
 	reGroup = []

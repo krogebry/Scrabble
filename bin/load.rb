@@ -1,8 +1,8 @@
-#!/usr/bin/ruby
+#!/usr/local/bin/ruby
 ##
 # Load some data into the db.
 ##
-require 'init.rb'
+require "./init.rb"
 
 begin
 	vowels = [ :a, :e, :i, :o, :u ]
@@ -37,8 +37,8 @@ begin
 
 	cWords = DBConn.collection( "words" )
 	cWords.remove()
-	File.open( "../data/twl06.txt" ).read.each do |word|
-		word.chop.downcase!
+	File.open( "../data/twl06.txt" ).each do |word|
+		word = word.chop.downcase
 
 		val = 0
 		word.each_char do |letter|

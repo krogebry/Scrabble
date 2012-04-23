@@ -7,7 +7,7 @@ require 'time'
 require 'mongo'
 require 'mongo_mapper'
 include Mongo
-require 'memcache'
+require 'dalli'
 require 'nokogiri'
 
 require '../config/config.rb'
@@ -21,7 +21,8 @@ DBConn = Connection.new( DBHostname,DBPort,{ :slave_ok => true, :pool_size => 10
 Dir.glob(File.join("../libs/**", '*.rb')).sort().each { |f| require f }
 Dir.glob(File.join("../models/**", '*.rb')).sort().each { |f| require f }
 
-MCache = Memcache.new({ :servers => [MCServers] })
+Memc = Dalli::Client.new( "127.0.0.1:11211" )
+#MCache = Memcache.new({ :servers => [MCServers] })
 #SStr = SecureStrings.new()
 
 Log = Logger.new(STDOUT)

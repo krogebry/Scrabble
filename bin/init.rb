@@ -1,15 +1,15 @@
 ##
 # Init for bin scripts
 ##
-require 'rubygems'
+require "rubygems"
 require 'net/http'
 require 'time'
-require 'mongo'
+#require 'mongo'
 require 'logger'
 #require 'mongo_mapper'
-require 'dalli'
-include Mongo
-require 'dalli'
+#require 'dalli'
+#include Mongo
+require "dalli"
 require 'nokogiri'
 
 require '../config/config.rb'

@@ -36,7 +36,7 @@ begin
 		#cWords.save({ :word => l.chop() })
 	#end
 
-	strWordGroup = %{g,g,l,d,n,e,m}
+	strWordGroup = %{e,d,e,r,d,o,a}
 	#strWordGroup = options[:letters]
 
 	#spaces = [1,3,1,1,1,1]
@@ -44,8 +44,8 @@ begin
 	#spaces = [1,1,1,1,3]
 	spaces = [1,1,1,1,1,1]
 
-	#re = /^[#{strWordGroup}]{1}e[#{strWordGroup}]{1,2}$/
-	re = /^c[#{strWordGroup}]{4}$/
+	re = /^h[#{strWordGroup}]{3}e[#{strWordGroup}]{1,5}$/
+	#re = /^l[#{strWordGroup}]{1,2}$/
 
 	if(false)
 	reGroup = []
